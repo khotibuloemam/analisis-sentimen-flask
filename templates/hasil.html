@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hasil Analisis</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="p-4">
+    <h3>Hasil Analisis Sentimen</h3>
+    <table class="table table-sm table-bordered" style="width: 300px">
+      <tr>
+        <th>Sentimen</th>
+        <th>Jumlah</th>
+      </tr>
+      <tr>
+        <td>Positif</td>
+        <td>{{ jumlah_positif }}</td>
+      </tr>
+      <tr>
+        <td>Negatif</td>
+        <td>{{ jumlah_negatif }}</td>
+      </tr>
+      <tr>
+        <td>Netral</td>
+        <td>{{ jumlah_netral }}</td>
+      </tr>
+    </table>
+
+    <h4>Distribusi Sentimen</h4>
+    <canvas id="sentimenChart" style="width: 50px; height: 50px"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('sentimenChart').getContext('2d');
+      const sentimenChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+              labels: {{ labels | tojson }},
+              datasets: [{
+                  data: {{ values | tojson }},
+                  backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+                  borderColor: '#fff',
+                  borderWidth: 2
+              }]
+          },
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'bottom'
+                  }
+              }
+          }
+      });
+    </script>
+    <a href="/download" class="btn btn-success mb-3">Download Hasil CSV</a>
+    {{ tabel|safe }}
+  </body>
+</html>

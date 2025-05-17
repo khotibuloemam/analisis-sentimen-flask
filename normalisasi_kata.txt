@@ -1,0 +1,9 @@
+{
+    "bgus": "bagus",
+    "bgt": "banget",
+    "banget": "sangat",
+    "gak": "tidak",
+    "ga": "tidak",
+    "tdk": "tidak",
+    "nyesel": "menyesal"
+}
